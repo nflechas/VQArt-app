@@ -42,6 +42,9 @@ def load_entities(entities_path):
     return [l.strip() for l in f.readlines()]
 
 def scrape(entities_path, save_path):
+  if not os.path.exists(save_path):
+    os.makedirs(save_path)
+
   entities = load_entities(entities_path)
   for entity in entities:
     raw_article = get_raw_wikipedia_article(entity)
