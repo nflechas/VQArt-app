@@ -43,19 +43,16 @@ search_engine = load_search_engine()
 
 st.title("VQArt")
 
-st.markdown("""Hello, please take a picture of the painting and ask a question about it. \\ 
-               I can answer questions about the style, artist and genre of the painting, \\
-               and then questions about these topics. \\
+st.markdown("""Hello, please take a picture of the painting and ask a question about it. \
+               I can answer questions about the style, artist and genre of the painting, \
+               and then questions about these topics. \
                """)
 
 # Take a picture
 imgbuffer = st.camera_input('')
 
 # Prompt for a question
-st.markdown("What is your question (e.g. Who's the author of the painting?)")
-
-# Question text input element
-question = st.text_input()
+question = st.text_input(label="What is your question (e.g. Who's the author of the painting?")
 
 if question:
     print(f'Received question: {question}')
