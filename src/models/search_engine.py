@@ -3,7 +3,10 @@ from tqdm import tqdm
 from whoosh.index import * # whoosh: full-text indexing and searching
 from whoosh.fields import *
 from whoosh import qparser
-import src.data.wiki_scrape as wiki_scrape
+import sys
+sys.path.insert(1, "src/data")
+#import src.data.wiki_scrape as wiki_scrape
+import wiki_scrape as wiki_scrape
 
 class IR(object):
     def __init__(self, 
