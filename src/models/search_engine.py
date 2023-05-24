@@ -40,6 +40,9 @@ class IR(object):
         return passages
 
     def __scrape_wiki_if_not_exists(self):
+        if not os.path.exists(self.data_path):
+            os.makedirs(self.data_path)
+
         if len(os.listdir(self.data_path)) == 0:
             print('No Wiki articles. Scraping...')
             wiki_scrape.scrape('src/data/entities.txt', 'data/wiki_articles')
