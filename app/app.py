@@ -5,8 +5,12 @@ from PIL import Image
 import numpy as np
 from pathlib import Path
 import shutil
-from src.models.extractive_qa import QA
-from src.models.search_engine import IR
+import sys
+sys.path.insert(1, "src/models")
+from extractive_qa import QA
+from search_engine import IR
+# from src.models.extractive_qa import QA
+# from src.models.search_engine import IR
 
 @st.cache_resource
 def load_qa_module():
