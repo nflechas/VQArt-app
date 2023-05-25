@@ -2,7 +2,7 @@ from transformers import pipeline
 
 
 class VisualQA(object):
-    def __init__(self, model_name='nouman-10/vqa_test', tokenizer_name='dandelin/vilt-b32-finetuned-vqa'):
+    def __init__(self, model_name='nflechas/VQArt', tokenizer_name='dandelin/vilt-b32-finetuned-vqa'):
         self.model_name = model_name
         self.tokenizer_name = tokenizer_name
         self.__load_model()
