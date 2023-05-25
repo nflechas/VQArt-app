@@ -70,6 +70,9 @@ st.markdown("""Hello, please take a picture of the painting and ask a question a
 # Take a picture
 imgbuffer = st.camera_input('')
 
+# Upload a file
+uploaded_file = st.file_uploader('Upload a photo of a painting')
+
 # Prompt for a question
 question = st.text_input(label="What is your question (e.g. Who's the artist of this painting?)")
 
@@ -89,7 +92,13 @@ if question:
             st.markdown(f'Answer: {answer}')
     else:
         # Doing VQA
-        img = Image.open(imgbuffer)
+
+        if imgbuffer:
+            # Camera
+            img = Image.open(imgbuffer)
+        elif uploaded_file:
+            # Uploaded file
+            img = Image.open(uploaded_file)
 
         result = vqa_module.answer_question(question, img)
         meta_data = get_metadata_from_question(question)
