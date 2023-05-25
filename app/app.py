@@ -46,9 +46,12 @@ def get_metadata_from_question(question):
     elif 'genre' in question:
         return 'genre'
 
-# Defining a session variable
+# Defining session variables
 if 'extractive_qa' not in st.session_state:
-	st.session_state.extractive_qa = False
+    st.session_state.extractive_qa = False
+
+if 'vqa_prediction' not in st.session_state:
+    st.session_state.vqa_prediction = None
 
 dirpath = Path.cwd() / 'results'
 model_path = Path.cwd() / 'models'
@@ -81,14 +84,16 @@ if question:
 
     if st.session_state.extractive_qa:
         # Doing Extractive QA
-        articles, scores = search_engine.retrieve_documents(question, 5)
+        full_question = f'[{st.session_state.vqa_prediction}] {question}'
+
+        articles, scores = search_engine.retrieve_documents(full_question, 5)
         print(f'Found {len(articles)} search results')
         
         if len(articles) == 0:
             st.markdown("Sorry, I don't know the answer to that question :(")
         else:
             best_result = articles[0]
-            answer = qa_module.answer_question(question, best_result)
+            answer = qa_module.answer_question(full_question, best_result)
             st.markdown(f'Answer: {answer}')
     else:
         # Doing VQA
@@ -106,3 +111,6 @@ if question:
 
         # Switching to extractive QA
         st.session_state.extractive_qa = True
+
+        # Saving the predicted VQA answer
+        st.session_state.vqa_prediction = result
