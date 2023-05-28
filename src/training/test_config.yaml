@@ -1,0 +1,18 @@
+dataset_name: Artificio/WikiArt_Full
+checkpoint: dandelin/vilt-b32-mlm
+epochs: 1
+batch_size: 4
+lr: 1e-5
+
+
+sequence_of_filter_cols:
+  - artist
+  - genre
+  - style
+
+
+max_num_of_values_per_col:
+  - 500
+  - 500
+  - 500
+
